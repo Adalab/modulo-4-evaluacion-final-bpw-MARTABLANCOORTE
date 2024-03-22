@@ -1,0 +1,27 @@
+{
+  "name": "modulo-4-evaluacion-final-bpw-martablancoorte",
+  "version": "1.0.0",
+  "description": "evaluacion modulo 4 Adalab",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adalab/modulo-4-evaluacion-final-bpw-MARTABLANCOORTE.git"
+  },
+  "homepage": "https://github.com/Adalab/modulo-4-evaluacion-final-bpw-MARTABLANCOORTE#readme",
+  "author": "Marta Blanco Orte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adalab/modulo-4-evaluacion-final-bpw-MARTABLANCOORTE/issues"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.1",
+    "mysql2": "^3.9.2",
+    "nodemon": "^3.1.0"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": " npx nodemon src/index.js"
+  }
+}
