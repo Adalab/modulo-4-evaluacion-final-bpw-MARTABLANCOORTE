@@ -103,14 +103,14 @@ exports.create = async (req, res) => {
         `;
 
       //5. Encriptado de contraseña:
-      //const crypedPass = await bcrypt.hash( req.body.password, 10 );
+      const crypedPass = await bcrypt.hash( req.body.password, 10 );
 
       //5. Obtenemos resultados:
       const [insertResult] = await conn.execute(InsertUsuario, [
         req.body.email,
         req.body.user,
         req.body.nombre,
-        req.body.password,
+        crypedPass,
       ]);
 
       //6. Recupero el id de Projects
