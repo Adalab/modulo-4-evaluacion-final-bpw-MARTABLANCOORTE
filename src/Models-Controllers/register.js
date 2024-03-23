@@ -1,9 +1,9 @@
 //Importar bibliotecas
 const { getConnection2 } = require('../Models-Controllers/dbUsuarios');
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
-//LOGIN
+//REGISTER
 exports.create = async (req, res) => {
   try {
     if (!req.body.email || req.body.email === "") {
@@ -98,19 +98,21 @@ exports.create = async (req, res) => {
         }
 
       //4. Lanzar una query con Insert:
-      const InsertUsuario = `
-        INSERT INTO usuarios (email, user, nombre, password) VALUES (?, ?, ?, ?);
+      const InsertNewRegister = `
+        INSERT INTO usuarios (email, user, nombre, password) 
+          VALUES (?, ?, ?, ?);
         `;
 
-      //5. Encriptado de contraseña:
-      const crypedPass = await bcrypt.hash( req.body.password, 10 );
+      //5. Encriptado de contraseña: (NO FUNCIONA)
+      // const crypedPassword = await bcrypt.hash(req.body.password,10);
 
       //5. Obtenemos resultados:
-      const [insertResult] = await conn.execute(InsertUsuario, [
+      const [insertResult] = await conn.execute(InsertNewRegister, [
         req.body.email,
         req.body.user,
         req.body.nombre,
-        crypedPass,
+        req.body.password,
+        //crypedPassword
       ]);
 
       //6. Recupero el id de Projects
