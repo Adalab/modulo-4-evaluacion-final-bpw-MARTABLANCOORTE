@@ -11,7 +11,8 @@ const serverPort = 4000;
 
 // CREATE AND CONFIG SERVER
 server.use(cors());
-server.use(express.json());
+server.use(express.json({ limit: '25mb' }));
+server.set("view engine", "ejs");
 
 // CONFIGURACIÓN DE MYSQL
 
@@ -240,5 +241,45 @@ server.put('/api/recetas/:id', async (req, res) => {
     }
   });
 
+// 6. Mostrar el detalle de un proyecto (serv. dinámicos)
+server.get("/recetas/:id", async (req, res) => {
+  try{
+    //1. conectar a la base de datos:
+    const conn = await getConnection();
+
+    //2. Lanzar una query con SELECT y WHERE para recuperar las recetas por ID:
+    const queryGetRecetasId = `
+      SELECT * FROM recetas_db.recetas 
+      WHERE id = ?`;
+
+    //3. Obtenemos resultados:
+    const [ResultRecetaId] = await conn.execute(queryGetRecetasId, [
+      req.params.id,
+    ]);
+
+    // 4. Hago un template (EJS)
+
+    // 5. Cerramos conexión a la base de datos:
+    conn.close();
+
+    // 6. Devuelvo los resultados en la plantilla : 
+    const data = ResultRecetaId[0];
+
+    // res.render('plantilla', resultado)
+    res.render("details", data); 
+  }
+  catch (error) {
+    res.json({
+      success: false,
+      error:
+        "Ha habido un error en la base de datos. Por favor, vuelve a intentarlo más tarde. Gracias.",
+    });
+  }
+});
+
 // // SERVIDOR ESTÁTICOS
 // server.use(express.static("./public"));
+
+//DEFINIR SERVIDORES ESTÁTICOS
+const pathServerPublicStyles = "./src/public-css";
+server.use(express.static(pathServerPublicStyles));

@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+  }
+  
+:root {
+    font-family: 'Roboto', sans-serif;
+  }
+
+
+@media screen and (min-width: 420px) {
+    :root {
+      font-size: 12px;
+    }
+  }
+  
+@media screen and (min-width: 560px) {
+    :root {
+      font-size: 14px;
+    }
+  }
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 100vh;
+    margin: 40px;
+}
+
+.h2{
+   margin-bottom: 40px;
+}
